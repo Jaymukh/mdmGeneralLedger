@@ -1,0 +1,88 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout">
+	<form:SimpleForm id="idCCDetails" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+		labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+		singleContainerFullSize="false">
+		<form:content>
+			<core:Title text="General Data"/>
+			<Label text="Chart of Accounts" required="true"/>
+			<Input required="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{CostCenter>/Csks/vname}"
+				editable="{App>/edit}">
+				<layoutData>
+					<l:GridData span="XL2 L2 M3 S4"/>
+				</layoutData>
+				<customData>
+					<core:CustomData key="title" value="Chart of Accounts"></core:CustomData>
+					<core:CustomData key="table" value="T8JV"></core:CustomData>
+					<core:CustomData key="inputKey" value="vname"></core:CustomData>
+					<core:CustomData key="inputText" value="vname"></core:CustomData>
+					<core:CustomData key="bukrs" value="Company Code"></core:CustomData>
+					<core:CustomData key="vname" value="Joint Venture"></core:CustomData>
+				</customData>
+			</Input>
+			<Input value="" editable="false"/>
+			<Label text="Account / Name" required="true"/>
+			<Input required="true" value="{CostCenter>/Csks/kostl}" editable="{App>/edit}">
+				<layoutData>
+					<l:GridData span="XL2 L2 M3 S4"/>
+				</layoutData>
+			</Input>
+			<Input required="true" value="{CostCenter>/Cskt/ktext}" liveChange="onChangeName" editable="{App>/edit}"/>
+			<Label text="Long Text"/>
+			<Input value="{CostCenter>/Cskt/ltext}" liveChange="onChangeMText" editable="{App>/edit}"/>
+			<core:Title text="Administrative Data"/>
+			<Label text="New Account"/>
+			<Input value="{CostCenter>/Cskt/gsber}" editable="{App>/edit}" valueHelpOnly="true" showValueHelp="true"/>
+			<Label text="User Responsible"/>
+			<Input value="{CostCenter>/Cskt/gsber}" editable="{App>/edit}" valueHelpOnly="true" showValueHelp="true"/>
+			<Label text="Person Responsible" required="true"/>
+			<Input value="{CostCenter>/Cskt/gsber}" editable="{App>/edit}"/>
+			<core:Title text="Control Data"/>
+			<Label text="Account Group" required="true"/>
+			<Input required="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{CostCenter>/Csks/vname}"
+				editable="{App>/edit}">
+				<layoutData>
+					<l:GridData span="XL2 L2 M3 S4"/>
+				</layoutData>
+				<customData>
+					<core:CustomData key="title" value="Account Group"></core:CustomData>
+					<core:CustomData key="table" value="T8JV"></core:CustomData>
+					<core:CustomData key="inputKey" value="vname"></core:CustomData>
+					<core:CustomData key="inputText" value="vname"></core:CustomData>
+					<core:CustomData key="bukrs" value="Company Code"></core:CustomData>
+					<core:CustomData key="vname" value="Joint Venture"></core:CustomData>
+				</customData>
+			</Input>
+			<Input value="{CostCenter>/Cskt/ktext}" liveChange="onChangeName" editable="{App>/edit}"/>
+			<Label text="Account Type" required="true"/>
+			<ComboBox required="true" editable="{App>/edit}"></ComboBox>
+			<Label text="P&amp;L Statement Account Type"/>
+			<Input value="{CostCenter>/Csks/kostl}" editable="false">
+				<layoutData>
+					<l:GridData span="XL2 L2 M3 S4"/>
+				</layoutData>
+			</Input>
+			<Input value="{CostCenter>/Cskt/ktext}" editable="false"/>
+			<Label text="Functional Area"/>
+			<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{CostCenter>/Csks/vname}"
+				editable="{App>/edit}">
+				<layoutData>
+					<l:GridData span="XL2 L2 M3 S4"/>
+				</layoutData>
+				<customData>
+					<core:CustomData key="title" value="Functional Area"></core:CustomData>
+					<core:CustomData key="table" value="T8JV"></core:CustomData>
+					<core:CustomData key="inputKey" value="vname"></core:CustomData>
+					<core:CustomData key="inputText" value="vname"></core:CustomData>
+					<core:CustomData key="bukrs" value="Company Code"></core:CustomData>
+					<core:CustomData key="vname" value="Joint Venture"></core:CustomData>
+				</customData>
+			</Input>
+			<Input value="{CostCenter>/Cskt/ktext}" editable="false"/>
+			<core:Title text="Audit Information"/>
+			<Label text="Created On/By"/>
+			<Input editable="false" value="{CostCenter>/Cskt/ersad}/{CostCenter>/Cskt/usnam}"/>
+			<Label text="Changed On/By"/>
+			<Input editable="false" value=""/>
+		</form:content>
+	</form:SimpleForm>
+</core:FragmentDefinition>

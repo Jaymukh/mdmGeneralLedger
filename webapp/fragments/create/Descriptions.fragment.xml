@@ -1,0 +1,44 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout">
+	<Table items="{CostCenter>/Cskt}">
+		<headerToolbar>
+			<Toolbar>
+				<ToolbarSpacer></ToolbarSpacer>
+				<Button text="Add" press="onAddDescription" type="Emphasized" visible="{App>/edit}"></Button>
+			</Toolbar>
+		</headerToolbar>
+		<columns>
+			<Column>
+				<header>
+					<Label text="Language" design="Bold"></Label>
+				</header>
+			</Column>
+			<Column >
+				<header>
+					<Label text="Name" design="Bold"></Label>
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Label text="Long Text" design="Bold"></Label>
+				</header>
+			</Column>
+			<Column width="5%">
+				<header>
+					<Label design="Bold"></Label>
+				</header>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+					<ComboBox required="true" selectedKey="{CostCenter>spras}" items="{Dropdowns>/T002}" editable="{App>/edit}">
+						<core:Item key="{Dropdowns>spras}" text="{Dropdowns>sptxt}"/>
+					</ComboBox>
+					<Input value="{CostCenter>ktext}" editable="{App>/edit}"/>
+					<Input value="{CostCenter>ltext}" editable="{App>/edit}"/>
+					<core:Icon src="sap-icon://delete" color="Negative" class="sapUiSmallMarginEnd" press="onDeleteDesc" visible="{App>/edit}"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</core:FragmentDefinition>

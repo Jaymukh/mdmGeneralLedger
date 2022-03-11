@@ -1,0 +1,30 @@
+{
+	"edit": false,
+	"editButton": false,
+	"saveButton": false,
+	"approveButton": false,
+	"rejectButton": false,
+	"submitButton": false,
+	"erpPreview": false,
+	"crPreview": false,
+	"previousPage": null,
+	"appTitle": "Search Cost Center",
+	"dateFormat": "yyyy/dd/MM",
+	"dateValueFormat": "yyyy-MM-dd",
+	"sidePanelSelectedPage": "",
+	"sideNavExp": false,
+	"supportedFileTypes": ["jpg", "jpeg", "png", "pdf", "msg", "eml"],
+	"changeReq": {
+		"desc": "",
+		"priority": "",
+		"dueDate": "",
+		"reason": "",
+		"status": "",
+		"createdBy": "",
+		"currWrkItem": "",
+		"timeCreation": "",
+		"dateCreation": "",
+		"change_request_by": {},
+		"modified_by": {}
+	}
+}

@@ -1,0 +1,15 @@
+.createPageHeight {
+    height: calc(100% - 2rem) !important;
+}
+
+.sapUxAPObjectPageHeaderContent {
+    padding-left: 0rem !important;
+}
+
+.noBorderToolbar {
+    border-bottom: none !important;
+}
+
+.noBorderFilterBar {
+    border-bottom: none !important;
+}

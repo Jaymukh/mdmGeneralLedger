@@ -1,0 +1,25 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout">
+	<form:SimpleForm id="idGLConsolidation" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+		labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+		singleContainerFullSize="false">
+		<form:content>
+			<core:Title text="Consolidation Details"/>
+			<Label text="Trading Partner"/>
+			<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{CostCenter>/Csks/vname}"
+				editable="{App>/edit}">
+				<customData>
+					<core:CustomData key="title" value="Trading Partner"></core:CustomData>
+					<core:CustomData key="table" value="T8JV"></core:CustomData>
+					<core:CustomData key="inputKey" value="vname"></core:CustomData>
+					<core:CustomData key="inputText" value="vname"></core:CustomData>
+					<core:CustomData key="bukrs" value="Company Code"></core:CustomData>
+					<core:CustomData key="vname" value="Joint Venture"></core:CustomData>
+				</customData>
+			</Input>
+			<Label text="Group Account"/>
+			<Input value="{CostCenter>/Csks/kostl}" editable="false"/>
+			<Label text="Statistical Group Account"/>
+			<Input value="{CostCenter>/Cskt/ltext}" editable="false"/>
+		</form:content>
+	</form:SimpleForm>
+</core:FragmentDefinition>
