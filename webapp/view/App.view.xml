@@ -4,8 +4,8 @@
 		<tnt:ToolPage id="toolPage" sideExpanded="{App>/sideNavExp}">
 			<tnt:header>
 				<tnt:ToolHeader>
-					<Button tooltip="{= ${App>/sideNavExp} ? 'Small Size Navigation' : 'Large Size Navigation'}"
-						icon="{= ${App>/sideNavExp} ? 'sap-icon://close-command-field' : 'sap-icon://open-command-field'}" type="Transparent" press="onSideNavPress">
+					<Button tooltip="{= ${App>/sideNavExp} ? 'Small Size Navigation' : 'Large Size Navigation'}" icon="sap-icon://menu2" type="Transparent"
+						press="onSideNavPress">
 						<layoutData>
 							<OverflowToolbarLayoutData priority="NeverOverflow"/>
 						</layoutData>
