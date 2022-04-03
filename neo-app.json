@@ -33,10 +33,17 @@
 		},
 		"description": "SAPUI5 Test Resources"
 	}, {
-		"path": "/murphyCustom",
+		"path": "/mdmccpc",
 		"target": {
 			"type": "destination",
-			"name": "MDM_JAVA_DEST"
+			"name": "MDM_CUST_JAVA_DEST"
+		},
+		"description": "Destination"
+	}, {
+		"path": "/MurphyECCOdataDest",
+		"target": {
+			"type": "destination",
+			"name": "MDM_ECC_ODATA_DEST"
 		},
 		"description": "Destination"
 	}, {

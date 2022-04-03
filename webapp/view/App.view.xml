@@ -25,7 +25,7 @@
 						<tnt:NavigationListItem text="Create" icon="sap-icon://create" key="GlCreate"/>
 						<tnt:NavigationListItem text="Change" icon="sap-icon://request">
 							<tnt:NavigationListItem text="All Change Request" key="GlChangeRequests"/>
-							<tnt:NavigationListItem text="Mass Change Request" key="GlMassChangeRequests"/>
+							<tnt:NavigationListItem text="Mass Change Request" key="GlChangeRequests"/>
 						</tnt:NavigationListItem>
 					</tnt:NavigationList>
 					<tnt:fixedItem>

@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout">
-	<Table items="{CostCenter>/Cskt}">
+	<Table items="{GL>/Cskt}">
 		<headerToolbar>
 			<Toolbar>
 				<ToolbarSpacer></ToolbarSpacer>
@@ -46,14 +46,14 @@
 		<items>
 			<ColumnListItem>
 				<cells>
-					<ComboBox required="true" selectedKey="{CostCenter>spras}" items="{Dropdowns>/T002}" editable="{App>/edit}">
+					<ComboBox required="true" selectedKey="{GL>spras}" items="{Dropdowns>/T002}" editable="{App>/edit}">
 						<core:Item key="{Dropdowns>spras}" text="{Dropdowns>sptxt}"/>
 					</ComboBox>
-					<Input value="{CostCenter>ktext}" editable="{App>/edit}"/>
-					<Input value="{CostCenter>ltext}" editable="{App>/edit}"/>
-					<Input value="{CostCenter>ktext}" editable="{App>/edit}"/>
-					<Input value="{CostCenter>ktext}" editable="{App>/edit}"/>
-					<Input value="{CostCenter>ktext}" editable="{App>/edit}"/>
+					<Input value="{GL>ktext}" editable="{App>/edit}"/>
+					<Input value="{GL>ltext}" editable="{App>/edit}"/>
+					<Input value="{GL>ktext}" editable="{App>/edit}"/>
+					<Input value="{GL>ktext}" editable="{App>/edit}"/>
+					<Input value="{GL>ktext}" editable="{App>/edit}"/>
 					<core:Icon src="sap-icon://delete" color="Negative" class="sapUiSmallMarginEnd" press="onDeleteDesc" visible="{App>/edit}"/>
 				</cells>
 			</ColumnListItem>

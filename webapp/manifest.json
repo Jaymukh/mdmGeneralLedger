@@ -94,6 +94,9 @@
 			"WorkFlowModel": {
 				"type": "sap.ui.model.json.JSONModel"
 			},
+			"GL": {
+				"type": "sap.ui.model.json.JSONModel"
+			},
 			"ChangeRequestsModel": {
 				"type": "sap.ui.model.json.JSONModel",
 				"settings": {
@@ -107,14 +110,14 @@
 					"DateFrom": null,
 					"DateTo": null,
 					"Show": "01",
-					"CostCenter": "",
-					"ProfitCenter": "",
-					"City": "",
-					"CompanyCode": "",
+					"AccountType": "",
+					"Name": "",
+					"glAccount": "",
+					"chartOfAccount": "",
 					"ReqType": "ALL_REQ"
 				}
 			},
-			"SearchModel": {
+			"SearchGLModel": {
 				"type": "sap.ui.model.json.JSONModel",
 				"settings": {
 					"defaultBindingMode": "TwoWay",
@@ -123,7 +126,7 @@
 					"PageData": [],
 					"TotalCount": 0,
 					"SelectedPageKey": 1,
-					"CostCenters": []
+					"GLAccounts": []
 				}
 			}
 		},
@@ -172,5 +175,9 @@
 				}
 			}
 		}
+	},
+	"sap.platform.hcp": {
+		"uri": "webapp",
+		"_version": "1.1.0"
 	}
 }

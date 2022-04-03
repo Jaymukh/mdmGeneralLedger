@@ -1,45 +1,49 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
-], function (Controller) {
+	"murphy/mdm/mdmGLAccount/controller/BaseController"
+], function (BaseController) {
 	"use strict";
 
-	return Controller.extend("murphy.mdm.mdmGLAccount.controller.GlCreate", {
+	return BaseController.extend("murphy.mdm.mdmGLAccount.controller.GlCreate", {
+		onChangeName: function (oEvent) {
+			var sName = oEvent.getSource().getValue(),
+				oGLModel = this.getModel("GL"),
+				oGL = oGLModel.getData(),
+				oSkat = Object.assign({}, this.getModel("App").getProperty("/skat"));
 
-		/**
-		 * Called when a controller is instantiated and its View controls (if available) are already created.
-		 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
-		 * @memberOf murphy.mdm.mdmGLAccount.view.GlCreate
-		 */
-		onInit: function () {
+			var oEnSkat = oGL.Skat.find(oItem => {
+				return oItem.spras === "E";
+			});
 
+			if (oEnSkat) {
+				oEnSkat.ktext = sName;
+			} else {
+				oSkat.entity_id = oGL.Ska1.entity_id;
+				oSkat.ktext = sName;
+				oSkat.spras = "E";
+				oGL.Skat.push(oSkat);
+			}
+			oGLModel.setData(oGL);
 		},
 
-		/**
-		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
-		 * (NOT before the first rendering! onInit() is used for that one!).
-		 * @memberOf murphy.mdm.mdmGLAccount.view.GlCreate
-		 */
-		//	onBeforeRendering: function() {
-		//
-		//	},
+		onAddDescription: function (oEvent) {
+			var oGL = this.getModel("GL"),
+				oGLData = oGL.getData(),
+				oSkat = Object.assign({}, this.getModel("App").getProperty("/skat"));
+			oGLData.Skat.push(oSkat);
+			oSkat.entity_id = oGLData.Ska1.entity_id;
+			oGL.setData(oGLData);
+		},
 
-		/**
-		 * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
-		 * This hook is the same one that SAPUI5 controls get after being rendered.
-		 * @memberOf murphy.mdm.mdmGLAccount.view.GlCreate
-		 */
-		//	onAfterRendering: function() {
-		//
-		//	},
-
-		/**
-		 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
-		 * @memberOf murphy.mdm.mdmGLAccount.view.GlCreate
-		 */
-		//	onExit: function() {
-		//
-		//	}
-
+		onDeleteDesc: function (oEvent) {
+			var sPath = oEvent.getSource().getBindingContext("GL").getPath(),
+				oGLModel = this.getModel("GL"),
+				oGLData = oGLModel.getData(),
+				iIndex = Number(sPath.replace("/Skat/", ""));
+			if (iIndex > -1) {
+				oGLData.Skat.splice(iIndex, 1);
+				oGLModel.setData(oGLData);
+			}
+		}
 	});
 
 });

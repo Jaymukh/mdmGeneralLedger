@@ -32,6 +32,105 @@ sap.ui.define([
 			return this.getOwnerComponent().getModel("i18n").getResourceBundle().getText(sText, aArgs);
 		},
 
+		createEntityId: function (sEntityType) {
+			var objParam = {
+				url: "/mdmccpc/entity-service/entities/entity/create",
+				hasPayload: true,
+				type: "POST",
+				data: {
+					"entityType": "GL",
+					"parentDTO": {
+						"customData": {
+							"business_entity": {
+								"entity_type_id": "41004",
+								"created_by": this.getView().getModel("userManagementModel").getProperty("/data/user_id"),
+								"modified_by": this.getView().getModel("userManagementModel").getProperty("/data/user_id"),
+								"is_draft": true
+							}
+						}
+					}
+				}
+			};
+
+			return this.serviceCall.handleServiceRequest(objParam);
+		},
+
+		createGLEntity: function () {
+			var oGLModel = this.getModel("GL"),
+				oAppModel = this.getModel("App"),
+				oChangeRequest = Object.assign({}, oAppModel.getProperty("/changeReq")),
+				oSka1 = Object.assign({}, oAppModel.getProperty("/ska1")),
+				oSkb1 = Object.assign({}, oAppModel.getProperty("/skb1")),
+				oCska = Object.assign({}, oAppModel.getProperty("/cska")),
+				oCskb = Object.assign({}, oAppModel.getProperty("/cskb")),
+				oDate = new Date(),
+				sDate = `${oDate.getFullYear()}-${("0" + (oDate.getMonth() + 1) ).slice(-2)}-${("0" + oDate.getDate()).slice(-2)}`;
+
+			this.clearSidePanelDetails();
+			this.clearAllButtons();
+
+			/*For Testing Purpose*/
+			oAppModel.setProperty("/edit", true);
+			oAppModel.setProperty("/crEdit", true);
+
+			this.getView().setBusy(true);
+			this.createEntityId().then(oData => {
+				var oBusinessEntity = oData.result.generalLedgerDTOs[0].commonEntityDTO.customBusinessDTO;
+				oSka1.entity_id = oBusinessEntity.entity_id;
+				oSka1.erdat = sDate;
+				oSkb1.entity_id = oBusinessEntity.entity_id;
+				oCska.entity_id = oBusinessEntity.entity_id;
+				oCskb.entity_id = oBusinessEntity.entity_id;
+
+				oChangeRequest.change_request_id = 50001;
+				oChangeRequest.reason = "";
+				oChangeRequest.timeCreation = `${("0" + oDate.getHours()).slice(-2)}:${("0" + oDate.getMinutes()).slice(-2)}`;
+				oChangeRequest.dateCreation = sDate;
+				oChangeRequest.change_request_by = oBusinessEntity.hasOwnProperty("created_by") ? oBusinessEntity.created_by : {};
+				oChangeRequest.modified_by = oBusinessEntity.hasOwnProperty("modified_by") ? oBusinessEntity.modified_by : {};
+				this.getModel("AuditLogModel").setProperty("/details/businessID", oBusinessEntity.entity_id);
+
+				oGLModel.setData({
+					workflowID: "",
+					ChangeRequest: oChangeRequest,
+					Ska1: oSka1,
+					Skat: [],
+					skb1: oSkb1,
+					cska: oCska,
+					cskb: oCskb
+				});
+				oAppModel.setProperty("/edit", true);
+				oAppModel.setProperty("/crEdit", true);
+				oAppModel.setProperty("/saveButton", true);
+				oAppModel.setProperty("/checkButton", true);
+				oAppModel.setProperty("/previousPage", "");
+				this.getView().setBusy(false);
+				this.filterCRReasons(oChangeRequest.change_request_id, "GL_CR_REASON");
+			}, oError => {
+				MessageToast.show("Failed to create entity id, please try again");
+				this.getView().setBusy(false);
+			});
+		},
+
+		getGlCrStatistics: function () {
+			var oChangeRequestsModel = this.getModel("ChangeRequestsModel"),
+				objParam = {
+					url: "/mdmccpc/change-request-service/changerequests/changerequest/statistics/get",
+					hasPayload: true,
+					type: "POST",
+					data: {
+						"userId": this.getModel("userManagementModel").getProperty("/data/user_id"),
+						"changeRequestSearchDTO": {
+							"entityType": "GL"
+						}
+					}
+				};
+
+			this.serviceCall.handleServiceRequest(objParam).then(function (oData) {
+				oChangeRequestsModel.setProperty("/Statistics", oData.result);
+			});
+		},
+
 		getFilterValues: function (sFilterBarId) {
 			var oFilterValues = {};
 			this.byId(sFilterBarId).getAllFilterItems().forEach(oFilterItem => {
@@ -533,6 +632,21 @@ sap.ui.define([
 			oAppModel.setProperty("/crPreview", false);
 		},
 
+		clearSidePanelDetails: function () {
+			var oCommentsModel = this.getModel("CommentsModel"),
+				oAttachModel = this.getModel("AttachmentsModel"),
+				oAudLogModel = this.getView().getModel("AuditLogModel"),
+				oWorkFlowModel = this.getModel("WorkFlowModel");
+
+			oCommentsModel.setData([]);
+			oAttachModel.setData([]);
+			oWorkFlowModel.setData([]);
+			oAudLogModel.setProperty("/details", {});
+			oAudLogModel.setProperty("/details/desc", "");
+			oAudLogModel.setProperty("/details/businessID", "");
+			oAudLogModel.setProperty("/details/ChangeRequestID", "");
+		},
+
 		formatCR_Entiry_ID: function (sCRId, sEntityID) {
 			var sID = "";
 			if (sCRId) {
@@ -551,240 +665,6 @@ sap.ui.define([
 				sText = "Organization: (no description available)";
 			}
 			return sText;
-		},
-
-		createCCEntity: function () {
-			var oCCModel = this.getModel("CostCenter"),
-				oAppModel = this.getModel("App"),
-				oChangeRequest = Object.assign({}, oAppModel.getProperty("/changeReq")),
-				oCsks = Object.assign({}, oAppModel.getProperty("/csks")),
-				sUserId = this.getView().getModel("userManagementModel").getProperty("/data/user_id"),
-				oDate = new Date(),
-				sDate = `${oDate.getFullYear()}-${("0" + (oDate.getMonth() + 1) ).slice(-2)}-${("0" + oDate.getDate()).slice(-2)}`;
-
-			var objParam = {
-				url: "/mdmccpc/entity-service/entities/entity/create",
-				hasPayload: true,
-				type: "POST",
-				data: {
-					"entityType": "COST_CENTER",
-					"parentDTO": {
-						"customData": {
-							"business_entity": {
-								"entity_type_id": "41004",
-								"created_by": sUserId,
-								"modified_by": sUserId,
-								"is_draft": true
-							}
-						}
-					}
-				}
-			};
-
-			this.serviceCall.handleServiceRequest(objParam).then(
-				//Success Handler
-				oData => {
-					var oBusinessEntity = oData.result.costCenterDTOs[0].businessEntityDTO;
-					oCsks.entity_id = oBusinessEntity.entity_id;
-					oCsks.datab = sDate;
-					oChangeRequest.change_request_id = 50001;
-					oChangeRequest.reason = "";
-					oChangeRequest.timeCreation = `${("0" + oDate.getHours()).slice(-2)}:${("0" + oDate.getMinutes()).slice(-2)}`;
-					oChangeRequest.dateCreation = sDate;
-					oChangeRequest.change_request_by = oBusinessEntity.hasOwnProperty("created_by") ? oBusinessEntity.created_by : {};
-					oChangeRequest.modified_by = oBusinessEntity.hasOwnProperty("modified_by") ? oBusinessEntity.modified_by : {};
-
-					var oAudLogModel = this.getView().getModel("AuditLogModel");
-					if (!oAudLogModel.getProperty("/details")) {
-						oAudLogModel.setProperty("/details", {});
-					}
-
-					oAudLogModel.setProperty("/details/desc", "");
-					oAudLogModel.setProperty("/details/businessID", oBusinessEntity.entity_id);
-					oAudLogModel.setProperty("/details/ChangeRequestID", "");
-
-					oCCModel.setData({
-						workflowID: "",
-						ChangeRequest: oChangeRequest,
-						Csks: oCsks,
-						Cskt: []
-					});
-				},
-				//Error Handler 
-				oError => {
-
-				});
-		},
-
-		createPCEntity: function () {
-			var oPCModel = this.getModel("ProfitCenter"),
-				oAppModel = this.getModel("App"),
-				oChangeRequest = Object.assign({}, oAppModel.getProperty("/changeReq")),
-				oCepc = Object.assign({}, oAppModel.getProperty("/cepc")),
-				sUserId = this.getView().getModel("userManagementModel").getProperty("/data/user_id"),
-				oDate = new Date(),
-				sDate = `${oDate.getFullYear()}-${("0" + (oDate.getMonth() + 1) ).slice(-2)}-${("0" + oDate.getDate()).slice(-2)}`;
-
-			var objParam = {
-				url: "/mdmccpc/entity-service/entities/entity/create",
-				hasPayload: true,
-				type: "POST",
-				data: {
-					"entityType": "PROFIT_CENTER",
-					"parentDTO": {
-						"customData": {
-							"business_entity": {
-								"entity_type_id": "41004",
-								"created_by": sUserId,
-								"modified_by": sUserId,
-								"is_draft": true
-							}
-						}
-					}
-				}
-			};
-
-			this.serviceCall.handleServiceRequest(objParam).then(
-				//Success Handler
-				oData => {
-					var oBusinessEntity = oData.result.profitCenterDTOs[0].businessEntityDTO;
-					oCepc.entity_id = oBusinessEntity.entity_id;
-					oCepc.datab = sDate;
-					oCepc.ersda = sDate;
-					oChangeRequest.change_request_id = 50001;
-					oChangeRequest.reason = "";
-					oChangeRequest.timeCreation = `${("0" + oDate.getHours()).slice(-2)}:${("0" + oDate.getMinutes()).slice(-2)}`;
-					oChangeRequest.dateCreation = sDate;
-					oChangeRequest.change_request_by = oBusinessEntity.hasOwnProperty("created_by") ? oBusinessEntity.created_by : {};
-					oChangeRequest.modified_by = oBusinessEntity.hasOwnProperty("modified_by") ? oBusinessEntity.modified_by : {};
-
-					var oAudLogModel = this.getView().getModel("AuditLogModel");
-					if (!oAudLogModel.getProperty("/details")) {
-						oAudLogModel.setProperty("/details", {});
-					}
-
-					oAudLogModel.setProperty("/details/desc", "");
-					oAudLogModel.setProperty("/details/businessID", oBusinessEntity.entity_id);
-					oAudLogModel.setProperty("/details/ChangeRequestID", "");
-
-					oPCModel.setData({
-						workflowID: "",
-						ChangeRequest: oChangeRequest,
-						Cepc: oCepc,
-						Cepct: [],
-						CepcBukrs: [],
-						Cepc_bukrs: Object.assign({}, oAppModel.getProperty("/cepc_bukrs"))
-					});
-				},
-				//Error Handler 
-				oError => {
-
-				});
-		},
-
-		getAllGLChangeRequests: function (nPageNo = 1) {
-			var oFilters = this.getCRSearchFilters(nPageNo);
-			this.clearCRTableModel();
-			oFilters.entityType = "COST_CENTER";
-			this.getAllChangeRequest(nPageNo, oFilters);
-		},
-
-		getAllChangeRequest: function (nPageNo, oFilters) {
-			var oChangeRequestsModel = this.getModel("ChangeRequestsModel");
-			var objParam = {
-				url: "/mdmccpc/change-request-service/changerequests/changerequest/filters/get",
-				hasPayload: true,
-				type: "POST",
-				data: {
-					"crSearchType": oFilters.entityType === "PROFIT_CENTER" ? "GET_CR_BY_PROFIT_CENTER_FILTERS" : "GET_CR_BY_COST_CENTER_FILTERS",
-					"currentPage": nPageNo,
-					"changeRequestSearchDTO": oFilters
-				}
-			};
-
-			this.getView().setBusy(true);
-			this.serviceCall.handleServiceRequest(objParam).then(function (oData) {
-				if (oData.result.currentPage === 1) {
-					var aPageJson = [],
-						iTotalPage = oData.result.totalPageCount;
-
-					if (oData.result.totalPageCount === 0) {
-						iTotalPage = oData.result.maxPageSize > 0 ? Math.ceil(oData.result.totalCount / oData.result.maxPageSize) : 1;
-					}
-					for (var i = 0; i < iTotalPage; i++) {
-						aPageJson.push({
-							key: i + 1,
-							text: i + 1
-						});
-					}
-					oChangeRequestsModel.setProperty("/PageData", aPageJson);
-				}
-
-				oChangeRequestsModel.setProperty("/ChangeRequests", oData.result.parentCrDTOs);
-				oChangeRequestsModel.setProperty("/SelectedPageKey", oData.result.currentPage);
-				oChangeRequestsModel.setProperty("/RightEnabled", oData.result.totalPageCount > oData.result.currentPage ? true : false);
-				oChangeRequestsModel.setProperty("/LeftEnabled", oData.result.currentPage > 1 ? true : false);
-				oChangeRequestsModel.setProperty("/TotalCount", oData.result.parentCrDTOs.length);
-				this.getView().setBusy(false);
-			}.bind(this), function () {
-				//Error Handler
-				this.getView().setBusy(false);
-				MessageToast.show("Error in getting Change Requests");
-			}.bind(this));
-		},
-
-		getCRSearchFilters: function (nPageNo = 1) {
-			var oCRSearchData = Object.assign({}, this.getModel("ChangeRequestsModel").getData()),
-				sUserId = this.getView().getModel("userManagementModel").getProperty("/data/user_id"),
-				oFilters = Object.create(null);
-			oCRSearchData.DateFrom = oCRSearchData.DateFrom ? oCRSearchData.DateFrom : new Date(0);
-			oCRSearchData.DateTo = oCRSearchData.DateTo ? oCRSearchData.DateTo : new Date();
-			oFilters.dateRangeFrom =
-				`${oCRSearchData.DateFrom.getFullYear()}-${("0" + (oCRSearchData.DateFrom.getMonth() + 1) ).slice(-2)}-${("0" + oCRSearchData.DateFrom.getDate()).slice(-2)}`;
-			oFilters.dateRangeTo =
-				`${oCRSearchData.DateTo.getFullYear()}-${("0" + (oCRSearchData.DateTo.getMonth() + 1) ).slice(-2)}-${("0" + oCRSearchData.DateTo.getDate()).slice(-2)}`;
-			oFilters.createdBy = oCRSearchData.Show === "01" ? "" : sUserId;
-			oFilters.isClaimed = oCRSearchData.Show === "01" || oCRSearchData.Show === "02" ? "" : true;
-			oFilters.isCrClosed = oCRSearchData.Show === "04" ? true : oCRSearchData.Show === "03" ? false : "";
-			oFilters.approvedEntityId = oCRSearchData.Customer;
-			oFilters.countryCode = oCRSearchData.City;
-			oFilters.companyCode = oCRSearchData.CompanyCode;
-			oFilters.entity_type_id = "41003";
-			oFilters.listOfCRSearchCondition = [
-				"GET_CR_BY_ADDRESS",
-				"GET_CR_CREATED_BY_USER_ID",
-				"GET_CR_BY_DATE_RANGE",
-				"GET_CR_BY_ENTITY",
-				"GET_CR_BY_COMPANY_CODE",
-				"GET_CR_PROCESSED_BY_USER_ID"
-			];
-
-			return oFilters;
-		},
-
-		getCostCenterDetails: function (sCostCenter) {
-			var objParamCreate = {
-				url: "/mdmccpc/entity-service/entities/entity/get",
-				type: "POST",
-				hasPayload: true,
-				data: {
-					"entitySearchType": "GET_BY_COST_CENTER_ID",
-					"entityType": "COST_CENTER",
-					"parentDTO": {
-						"customData": {
-							"fin_csks": {
-								"kostl": sCostCenter
-							}
-						}
-					}
-				}
-			};
-			this.getView().setBusy(true);
-			this.serviceCall.handleServiceRequest(objParamCreate).then(oDataResp => {
-				this.getView().setBusy(false);
-			}, oError => {
-				this.getView().setBusy(false);
-			});
 		},
 
 		clearCRTableModel: function () {
@@ -863,7 +743,7 @@ sap.ui.define([
 			}.bind(this));
 
 			Fragment.load({
-				name: "murphy.mdm.costProfit.mdmCostProfitCenter.fragments.valueHelpSuggest",
+				name: "murphy.mdm.mdmGLAccount.fragments.valueHelpSuggest",
 				controller: this
 			}).then(function name(oFragment) {
 				this._oValueHelpDialog = oFragment;
@@ -960,6 +840,43 @@ sap.ui.define([
 				oValueHelpDialog.update();
 			});
 		},
+
+		filterCRReasons: function (sRequestType, sAppName) {
+			var oDropDownModel = this.getModel("Dropdowns"),
+				aTaxonomyReasons = oDropDownModel.getProperty("/TAXONOMY") || [],
+				aCustCRReasons = aTaxonomyReasons.filter(oItem => {
+					return oItem.taxonomyType === sAppName;
+				}),
+				aFinalReasons = [];
+			switch (sRequestType) {
+			case 50001: //Create 
+				aFinalReasons = aCustCRReasons.filter(oItem => {
+					return oItem.groupName === "CREATE";
+				});
+				break;
+			case 50002: //Edit 
+				aFinalReasons = aCustCRReasons.filter(oItem => {
+					return oItem.groupName === "EDIT";
+				});
+				break;
+			case 50003: //Copy 
+				aFinalReasons = aCustCRReasons.filter(oItem => {
+					return oItem.groupName === "COPY";
+				});
+				break;
+			case 50004: //Block
+				aFinalReasons = aCustCRReasons.filter(oItem => {
+					return oItem.groupName === "BLOCK";
+				});
+				break;
+			case 50005: //Delete
+				aFinalReasons = aCustCRReasons.filter(oItem => {
+					return oItem.groupName === "DELETE";
+				});
+				break;
+			}
+			oDropDownModel.setProperty("/crReasons", aFinalReasons);
+		}
 
 	});
 });

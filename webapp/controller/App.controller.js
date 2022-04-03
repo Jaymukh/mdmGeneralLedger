@@ -1,6 +1,7 @@
 sap.ui.define([
-	"murphy/mdm/mdmGLAccount/controller/BaseController"
-], function (BaseController) {
+	"murphy/mdm/mdmGLAccount/controller/BaseController",
+	"sap/m/MessageToast"
+], function (BaseController, MessageToast) {
 	"use strict";
 
 	return BaseController.extend("murphy.mdm.mdmGLAccount.controller.App", {
@@ -17,7 +18,11 @@ sap.ui.define([
 			oAppModel.setProperty("/appTitle", this.getText(sKey));
 
 			switch (sKey) {
-			case "CostCenterCreate":
+			case "GlCreate":
+				this.createGLEntity();
+				break;
+			case "GlChangeRequests":
+				this.getGlCrStatistics();
 				break;
 			}
 		},
@@ -36,15 +41,15 @@ sap.ui.define([
 				"T005", //Country
 				"T005S", //Region
 				"T002", //Language
-				"T001", //Company Codes,
-				"TKA05", //Cost Center Category
-				"TFKB", //Functional Area
-				"TCURC", //Currency Codes
-				"FAGL_SEGM" //Segment 
+				"T001", //Company Codes
+				"vw_TFKB", //Functional Group
+				"vw_t004", //Chart of accounts
+				"TCURC" //Currency
 			];
 			aDropDowns.forEach(function (sValue) {
 				this.getDropdownTableData(sValue);
 			}, this);
+			this.getModel("Dropdowns").setProperty("/crReasons", []);
 		},
 
 		getDropdownTableData: function (sValue) {

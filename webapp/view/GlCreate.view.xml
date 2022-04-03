@@ -13,7 +13,7 @@
 							<core:Fragment fragmentName="murphy.mdm.mdmGLAccount.fragments.create.ChangeRequests" type="XML"/>
 						</content>
 					</Panel>
-					<Panel expandable="true" expanded="true" headerText="Validity">
+					<Panel expandable="true" expanded="true" headerText="Validity" visible="false">
 						<content>
 							<core:Fragment fragmentName="murphy.mdm.mdmGLAccount.fragments.create.Validity" type="XML"/>
 						</content>
@@ -38,7 +38,7 @@
 							<core:Fragment fragmentName="murphy.mdm.mdmGLAccount.fragments.create.CompanyCodes" type="XML"/>
 						</content>
 					</Panel>
-					<Panel expandable="true" expanded="false" headerText="Primary Cost Elements">
+					<Panel expandable="true" expanded="false" headerText="Primary Cost Elements" visible="{= ${GL>/Ska1/xbilk} === 'X'}">
 						<content>
 							<core:Fragment fragmentName="murphy.mdm.mdmGLAccount.fragments.create.CostElements" type="XML"/>
 						</content>

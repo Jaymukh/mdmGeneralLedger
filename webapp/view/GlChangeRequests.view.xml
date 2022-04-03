@@ -38,7 +38,7 @@
 										<SearchField/>
 										<ToggleButton id="slideToggleButtonID" icon="sap-icon://arrow-left" pressed="false" text="Side Menu" press="handleCRSideMenu"></ToggleButton>
 									</Toolbar>
-									<filterbar:FilterBar id="idFbChangeRequests" showFilterConfiguration="false" useToolbar="false" showGoOnFB="true" search="onSearchCCCR"
+									<filterbar:FilterBar id="idFbChangeRequests" showFilterConfiguration="false" useToolbar="false" showGoOnFB="true" search="onSearchGLCR"
 										class="noBorderFilterBar">
 										<filterbar:filterGroupItems >
 											<filterbar:FilterGroupItem visibleInFilterBar="true" groupName="ChangeReq" name="dateRange" label="Date Range">
@@ -57,19 +57,27 @@
 													</ComboBox>
 												</filterbar:control>
 											</filterbar:FilterGroupItem>
-											<filterbar:FilterGroupItem visibleInFilterBar="true" groupName="ChangeReq" name="costCenter" label="GLAccount">
+											<filterbar:FilterGroupItem visibleInFilterBar="true" groupName="ChangeReq" name="txt20" label="Name">
 												<filterbar:control>
-													<Input value="{ChangeRequestsModel>/Customer}"/>
+													<Input/>
 												</filterbar:control>
 											</filterbar:FilterGroupItem>
-											<filterbar:FilterGroupItem visibleInFilterBar="true" groupName="ChangeReq" name="city" label="City">
+											<filterbar:FilterGroupItem visibleInFilterBar="true" groupName="ChangeReq" name="saknr" label="Account">
 												<filterbar:control>
-													<Input value="{ChangeRequestsModel>/City}"/>
+													<Input/>
 												</filterbar:control>
 											</filterbar:FilterGroupItem>
-											<filterbar:FilterGroupItem visibleInFilterBar="true" groupName="ChangeReq" name="companyCode" label="Company Code">
+											<filterbar:FilterGroupItem visibleInFilterBar="true" groupName="ChangeReq" name="ktopl" label="Chart Of Accounts">
 												<filterbar:control>
-													<Input value="{ChangeRequestsModel>/CompanyCode}"/>
+													<Input/>
+												</filterbar:control>
+											</filterbar:FilterGroupItem>
+											<filterbar:FilterGroupItem visibleInFilterBar="true" groupName="ChangeReq" name="xbilk" label="Account Type">
+												<filterbar:control>
+													<ComboBox >
+														<core:ListItem key="X" text="Balance Sheet Account"/>
+														<core:ListItem key=" " text="Profit &amp; Loss Account"/>
+													</ComboBox>
 												</filterbar:control>
 											</filterbar:FilterGroupItem>
 										</filterbar:filterGroupItems>

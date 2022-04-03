@@ -5,7 +5,7 @@
 		<form:content>
 			<core:Title text="Consolidation Details"/>
 			<Label text="Trading Partner"/>
-			<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{CostCenter>/Csks/vname}"
+			<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{GL>/Csks/vname}"
 				editable="{App>/edit}">
 				<customData>
 					<core:CustomData key="title" value="Trading Partner"></core:CustomData>
@@ -17,9 +17,9 @@
 				</customData>
 			</Input>
 			<Label text="Group Account"/>
-			<Input value="{CostCenter>/Csks/kostl}" editable="false"/>
+			<Input value="{GL>/Csks/kostl}" editable="false"/>
 			<Label text="Statistical Group Account"/>
-			<Input value="{CostCenter>/Cskt/ltext}" editable="false"/>
+			<Input value="{GL>/Cskt/ltext}" editable="false"/>
 		</form:content>
 	</form:SimpleForm>
 </core:FragmentDefinition>

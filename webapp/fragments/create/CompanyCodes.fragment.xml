@@ -1,6 +1,6 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout">
 	<VBox>
-		<Table items="{CostCenter>/Cskt}">
+		<Table items="{GL>/Cskt}">
 			<headerToolbar>
 				<Toolbar>
 					<ToolbarSpacer></ToolbarSpacer>
@@ -22,7 +22,7 @@
 			<items>
 				<ColumnListItem>
 					<cells>
-						<ComboBox selectedKey="{CostCenter>spras}" items="{Dropdowns>/T002}" editable="{App>/edit}">
+						<ComboBox selectedKey="{GL>spras}" items="{Dropdowns>/T002}" editable="{App>/edit}">
 							<core:Item key="{Dropdowns>spras}" text="{Dropdowns>sptxt}"/>
 						</ComboBox>
 						<core:Icon src="sap-icon://delete" color="Negative" class="sapUiSmallMarginEnd" press="onDeleteDesc" visible="{App>/edit}"/>
@@ -36,8 +36,8 @@
 			<form:content>
 				<core:Title text=""/>
 				<Label text="Company Code" required="true"/>
-				<ComboBox required="true" selectedKey="{CostCenter>spras}" items="{Dropdowns>/T002}" editable="{App>/edit}">
-					<core:Item key="{Dropdowns>spras}" text="{Dropdowns>sptxt}"/>
+				<ComboBox required="true" selectedKey="{GL>/Skb1/bukrs}" items="{Dropdowns>/T001}" editable="{App>/edit}" showSecondaryValues="true">
+					<core:ListItem key="{Dropdowns>bukrs}" text="{Dropdowns>butxt}" additionalText="{Dropdowns>bukrs}"/>
 				</ComboBox>
 			</form:content>
 		</form:SimpleForm>
@@ -47,144 +47,126 @@
 			<form:content>
 				<core:Title text="Account Control in Company Code"/>
 				<Label text="Account Currency"/>
-				<ComboBox selectedKey="{CostCenter>spras}" items="{Dropdowns>/T002}" editable="{App>/edit}">
-					<core:Item key="{Dropdowns>spras}" text="{Dropdowns>sptxt}"/>
+				<ComboBox required="true" selectedKey="{GL>/Skb1ṇ/waers}" items="{Dropdowns>/TCURC}" editable="{App>/edit}" showSecondaryValues="true">
+					<core:ListItem key="{Dropdowns>waers}" text="{Dropdowns>ltext}" additionalText="{Dropdowns>waers}"/>
 				</ComboBox>
 				<Label text="Exchange Rate Difference Key"/>
-				<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{CostCenter>/Csks/vname}"
-					editable="{App>/edit}">
+				<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{GL>/Skb1/kdfsl}" editable="{App>/edit}">
 					<customData>
 						<core:CustomData key="title" value="Exchange Rate Difference Key"></core:CustomData>
-						<core:CustomData key="table" value="T8JV"></core:CustomData>
-						<core:CustomData key="inputKey" value="vname"></core:CustomData>
-						<core:CustomData key="inputText" value="vname"></core:CustomData>
-						<core:CustomData key="bukrs" value="Company Code"></core:CustomData>
-						<core:CustomData key="vname" value="Joint Venture"></core:CustomData>
+						<core:CustomData key="table" value="T030S"></core:CustomData>
+						<core:CustomData key="inputKey" value="kdfsl"></core:CustomData>
+						<core:CustomData key="inputText" value="kdfsl"></core:CustomData>
+						<core:CustomData key="kdfsl" value="Company Code"></core:CustomData>
+						<core:CustomData key="kdfsl" value="Joint Venture"></core:CustomData>
 					</customData>
 				</Input>
 				<Label text="Tax Category"/>
-				<ComboBox selectedKey="{CostCenter>spras}" items="{Dropdowns>/T002}" editable="{App>/edit}">
+				<ComboBox selectedKey="{GL>Skpb1/mwskz}" editable="{App>/edit}">
 					<core:Item key="{Dropdowns>spras}" text="{Dropdowns>sptxt}"/>
 				</ComboBox>
 				<Label text="Reconciliation Account for Account Type"/>
-				<Input editable="false"/>
+				<ComboBox selectedKey="{GL>Skpb1/mitkz}" editable="{App>/edit}">
+					<core:Item key="A" text="Assets"/>
+					<core:Item key="D" text="Customers"/>
+					<core:Item key="K" text="Vendors"/>
+					<core:Item key="V" text="Contract Accounts"/>
+				</ComboBox>
 				<Label text="Inflation Key"/>
-				<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{CostCenter>/Csks/vname}"
-					editable="{App>/edit}">
-					<layoutData>
-						<l:GridData span="XL2 L2 M3 S4"/>
-					</layoutData>
+				<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{GL>/Skb1/infky}" editable="{App>/edit}">
 					<customData>
 						<core:CustomData key="title" value="Inflation Key"></core:CustomData>
-						<core:CustomData key="table" value="T8JV"></core:CustomData>
+						<core:CustomData key="table" value="J_1AINFSKS"></core:CustomData>
 						<core:CustomData key="inputKey" value="vname"></core:CustomData>
 						<core:CustomData key="inputText" value="vname"></core:CustomData>
 						<core:CustomData key="bukrs" value="Company Code"></core:CustomData>
 						<core:CustomData key="vname" value="Joint Venture"></core:CustomData>
 					</customData>
 				</Input>
-				<Input value="" editable="false"/>
 				<Label text="Account Managed in External System"/>
-				<CheckBox select="onSelectCheckBox" selected="{= ${CostCenter>/Csks/bkzkp} === 'X'}" editable="{App>/edit}">
+				<CheckBox select="onSelectCheckBox" selected="{= ${GL>/Skb1/wmeth} === 'X'}" editable="{App>/edit}">
 					<customData>
-						<core:CustomData key="CostCenter>/Csks/bkzkp"/>
+						<core:CustomData key="GL>/Skb1/wmeth"/>
 					</customData>
 				</CheckBox>
 				<core:Title text=""/>
 				<Label text="Only Balances in Local Currency"/>
-				<CheckBox select="onSelectCheckBox" selected="{= ${CostCenter>/Csks/bkzkp} === 'X'}" editable="{App>/edit}">
+				<CheckBox select="onSelectCheckBox" selected="{= ${GL>/Skb1/xsalh} === 'X'}" editable="{App>/edit}">
 					<customData>
-						<core:CustomData key="CostCenter>/Csks/bkzkp"/>
+						<core:CustomData key="GL>/Skb1/xsalh"/>
 					</customData>
 				</CheckBox>
 				<Label text="Valuation Group"/>
-				<Input value="" editable="{App>/edit}"/>
+				<Input value="{GL>/Skb1/bewgp}" editable="{App>/edit}"/>
 				<Label text="Posting Without Tax Allowed"/>
-				<CheckBox select="onSelectCheckBox" selected="{= ${CostCenter>/Csks/bkzkp} === 'X'}" editable="{App>/edit}">
+				<CheckBox select="onSelectCheckBox" selected="{= ${GL>/Skb1/xmwno} === 'X'}" editable="{App>/edit}">
 					<customData>
-						<core:CustomData key="CostCenter>/Csks/bkzkp"/>
+						<core:CustomData key="GL>/Skb1/xmwno"/>
 					</customData>
 				</CheckBox>
 				<Label text="Alternative Account Number"/>
-				<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{CostCenter>/Csks/vname}"
-					editable="{App>/edit}">
+				<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{GL>/Skb1/altkt}" editable="{App>/edit}">
 					<customData>
 						<core:CustomData key="title" value="Alternative Account Number"></core:CustomData>
-						<core:CustomData key="table" value="T8JV"></core:CustomData>
-						<core:CustomData key="inputKey" value="vname"></core:CustomData>
-						<core:CustomData key="inputText" value="vname"></core:CustomData>
-						<core:CustomData key="bukrs" value="Company Code"></core:CustomData>
-						<core:CustomData key="vname" value="Joint Venture"></core:CustomData>
+						<core:CustomData key="table" value="SKB1"></core:CustomData>
+						<core:CustomData key="inputKey" value="saknr"></core:CustomData>
+						<core:CustomData key="inputText" value="saknr"></core:CustomData>
+						<core:CustomData key="saknr" value="Company Code"></core:CustomData>
+						<core:CustomData key="saknr" value="Joint Venture"></core:CustomData>
 					</customData>
 				</Input>
 				<Label text="Tolerance Group"/>
-				<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{CostCenter>/Csks/vname}"
-					editable="{App>/edit}">
-					<layoutData>
-						<l:GridData span="XL2 L2 M3 S4"/>
-					</layoutData>
+				<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{GL>/Skb1/togru}" editable="{App>/edit}">
 					<customData>
 						<core:CustomData key="title" value="Tolerance Group"></core:CustomData>
-						<core:CustomData key="table" value="T8JV"></core:CustomData>
-						<core:CustomData key="inputKey" value="vname"></core:CustomData>
-						<core:CustomData key="inputText" value="vname"></core:CustomData>
-						<core:CustomData key="bukrs" value="Company Code"></core:CustomData>
-						<core:CustomData key="vname" value="Joint Venture"></core:CustomData>
+						<core:CustomData key="table" value="T043S"></core:CustomData>
+						<core:CustomData key="inputKey" value="togru"></core:CustomData>
+						<core:CustomData key="inputText" value="togru"></core:CustomData>
+						<core:CustomData key="togru" value="Company Code"></core:CustomData>
+						<core:CustomData key="togru" value="Joint Venture"></core:CustomData>
 					</customData>
 				</Input>
-				<Input value="" editable="false"/>
 				<core:Title text="Account Management in Company Code"/>
 				<Label text="Open Item Management"/>
-				<CheckBox select="onSelectCheckBox" selected="{= ${CostCenter>/Csks/bkzkp} === 'X'}" editable="{App>/edit}">
+				<CheckBox select="onSelectCheckBox" selected="{= ${GL>/Skb1/xopvw} === 'X'}" editable="{App>/edit}">
 					<customData>
-						<core:CustomData key="CostCenter>/Csks/bkzkp"/>
+						<core:CustomData key="GL>/Skb1/xopvw"/>
 					</customData>
 				</CheckBox>
 				<Label text="Sort Key"/>
-				<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{CostCenter>/Csks/vname}"
-					editable="{App>/edit}">
-					<layoutData>
-						<l:GridData span="XL2 L2 M3 S4"/>
-					</layoutData>
+				<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{GL>/Skb1/zuawa}" editable="{App>/edit}">
 					<customData>
 						<core:CustomData key="title" value="Sort Key"></core:CustomData>
-						<core:CustomData key="table" value="T8JV"></core:CustomData>
-						<core:CustomData key="inputKey" value="vname"></core:CustomData>
-						<core:CustomData key="inputText" value="vname"></core:CustomData>
-						<core:CustomData key="bukrs" value="Company Code"></core:CustomData>
-						<core:CustomData key="vname" value="Joint Venture"></core:CustomData>
+						<core:CustomData key="table" value="TZUN"></core:CustomData>
+						<core:CustomData key="inputKey" value="zuawa"></core:CustomData>
+						<core:CustomData key="inputText" value="zuawa"></core:CustomData>
+						<core:CustomData key="zuawa" value="Company Code"></core:CustomData>
+						<core:CustomData key="zuawa" value="Joint Venture"></core:CustomData>
 					</customData>
 				</Input>
-				<Input value="" editable="false"/>
 				<Label text="Accounting Clerk"/>
-				<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{CostCenter>/Csks/vname}"
-					editable="{App>/edit}">
-					<layoutData>
-						<l:GridData span="XL2 L2 M3 S4"/>
-					</layoutData>
+				<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{GL>/Skb1/busab}" editable="{App>/edit}">
 					<customData>
 						<core:CustomData key="title" value="Accounting Clerk"></core:CustomData>
-						<core:CustomData key="table" value="T8JV"></core:CustomData>
-						<core:CustomData key="inputKey" value="vname"></core:CustomData>
-						<core:CustomData key="inputText" value="vname"></core:CustomData>
-						<core:CustomData key="bukrs" value="Company Code"></core:CustomData>
-						<core:CustomData key="vname" value="Joint Venture"></core:CustomData>
+						<core:CustomData key="table" value="T001S"></core:CustomData>
+						<core:CustomData key="inputKey" value="busab"></core:CustomData>
+						<core:CustomData key="inputText" value="busab"></core:CustomData>
+						<core:CustomData key="busab" value="Company Code"></core:CustomData>
+						<core:CustomData key="busab" value="Joint Venture"></core:CustomData>
 					</customData>
 				</Input>
-				<Input value="" editable="false"/>
 				<core:Title text=""/>
 				<Label text="Line Item Display"/>
-				<CheckBox select="onSelectCheckBox" selected="{= ${CostCenter>/Csks/bkzkp} === 'X'}" editable="{App>/edit}">
+				<CheckBox select="onSelectCheckBox" selected="{= ${GL>/Skb1/xkres} === 'X'}" editable="{App>/edit}">
 					<customData>
-						<core:CustomData key="CostCenter>/Csks/bkzkp"/>
+						<core:CustomData key="GL>/Skb1/xkres"/>
 					</customData>
 				</CheckBox>
 				<Label text="Authorization Group"/>
-				<Input value="{CostCenter>/Csks/vname}" editable="{App>/edit}"/>
+				<Input value="{GL>/Skb1/begru}" editable="{App>/edit}"/>
 				<core:Title text="Joint Venture Data in Company Code"/>
 				<Label text="Recovery Indicator"/>
-				<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{CostCenter>/Csks/vname}"
-					editable="{App>/edit}">
+				<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{GL>/Csks/vname}" editable="{App>/edit}">
 					<customData>
 						<core:CustomData key="title" value="Recovery Indicator"></core:CustomData>
 						<core:CustomData key="table" value="T8JV"></core:CustomData>
@@ -202,123 +184,111 @@
 			<form:content>
 				<core:Title text="Control of Document Creation in Company Code"/>
 				<Label text="Field Status Group"/>
-				<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{CostCenter>/Csks/vname}"
-					editable="{App>/edit}">
-					<layoutData>
-						<l:GridData span="XL2 L2 M3 S4"/>
-					</layoutData>
+				<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{GL>/Skb1/fstag}" editable="{App>/edit}">
 					<customData>
 						<core:CustomData key="title" value="Field Status Group"></core:CustomData>
-						<core:CustomData key="table" value="T8JV"></core:CustomData>
-						<core:CustomData key="inputKey" value="vname"></core:CustomData>
-						<core:CustomData key="inputText" value="vname"></core:CustomData>
-						<core:CustomData key="bukrs" value="Company Code"></core:CustomData>
-						<core:CustomData key="vname" value="Joint Venture"></core:CustomData>
+						<core:CustomData key="table" value="T004F"></core:CustomData>
+						<core:CustomData key="inputKey" value="fstag"></core:CustomData>
+						<core:CustomData key="inputText" value="fstag"></core:CustomData>
+						<core:CustomData key="fstag" value="Company Code"></core:CustomData>
+						<core:CustomData key="fstag" value="Joint Venture"></core:CustomData>
 					</customData>
 				</Input>
-				<Input value="" editable="false"/>
 				<Label text="Supplement Automatic Postings"/>
-				<CheckBox select="onSelectCheckBox" selected="{= ${CostCenter>/Csks/bkzkp} === 'X'}" editable="{App>/edit}">
+				<CheckBox select="onSelectCheckBox" selected="{= ${GL>/Skb1/xnkon} === 'X'}" editable="{App>/edit}">
 					<customData>
-						<core:CustomData key="CostCenter>/Csks/bkzkp"/>
+						<core:CustomData key="GL>/Skb1/xnkon"/>
 					</customData>
 				</CheckBox>
 				<core:Title text=""/>
 				<Label text="Post Automatically Only"/>
-				<CheckBox select="onSelectCheckBox" selected="{= ${CostCenter>/Csks/bkzkp} === 'X'}" editable="{App>/edit}">
+				<CheckBox select="onSelectCheckBox" selected="{= ${GL>/Skb1/xintb} === 'X'}" editable="{App>/edit}">
 					<customData>
-						<core:CustomData key="CostCenter>/Csks/bkzkp"/>
+						<core:CustomData key="GL>/Skb1/xintb"/>
 					</customData>
 				</CheckBox>
 				<Label text="Reconciliation Account Ready for Input"/>
-				<CheckBox select="onSelectCheckBox" selected="{= ${CostCenter>/Csks/bkzkp} === 'X'}" editable="{App>/edit}">
+				<CheckBox select="onSelectCheckBox" selected="{= ${GL>/Skb1/xmitk} === 'X'}" editable="{App>/edit}">
 					<customData>
-						<core:CustomData key="CostCenter>/Csks/bkzkp"/>
+						<core:CustomData key="GL>/Skb1/xmitk"/>
 					</customData>
 				</CheckBox>
 				<core:Title text="Bank/Financial Details in Company Code"/>
 				<Label text="Planning Level"/>
-				<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{CostCenter>/Csks/vname}"
-					editable="{App>/edit}">
-					<layoutData>
-						<l:GridData span="XL2 L2 M3 S4"/>
-					</layoutData>
+				<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{GL>/Skb1/fdlev}" editable="{App>/edit}">
 					<customData>
 						<core:CustomData key="title" value="Planning Level"></core:CustomData>
-						<core:CustomData key="table" value="T8JV"></core:CustomData>
-						<core:CustomData key="inputKey" value="vname"></core:CustomData>
-						<core:CustomData key="inputText" value="vname"></core:CustomData>
-						<core:CustomData key="bukrs" value="Company Code"></core:CustomData>
-						<core:CustomData key="vname" value="Joint Venture"></core:CustomData>
+						<core:CustomData key="table" value="T036"></core:CustomData>
+						<core:CustomData key="inputKey" value="fdlev"></core:CustomData>
+						<core:CustomData key="inputText" value="fdlev"></core:CustomData>
+						<core:CustomData key="fdlev" value="Identifier"></core:CustomData>
+						<core:CustomData key="fdlev" value="Description"></core:CustomData>
 					</customData>
 				</Input>
-				<Input value="" editable="false"/>
 				<Label text="House Bank"/>
-				<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{CostCenter>/Csks/vname}"
-					editable="{App>/edit}">
-					<layoutData>
-						<l:GridData span="XL2 L2 M3 S4"/>
-					</layoutData>
+				<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{GL>/Skb1/hbkid}" editable="{App>/edit}">
 					<customData>
 						<core:CustomData key="title" value="House Bank"></core:CustomData>
-						<core:CustomData key="table" value="T8JV"></core:CustomData>
-						<core:CustomData key="inputKey" value="vname"></core:CustomData>
+						<core:CustomData key="table" value="T012"></core:CustomData>
+						<core:CustomData key="inputKey" value="hbkid"></core:CustomData>
 						<core:CustomData key="inputText" value="vname"></core:CustomData>
-						<core:CustomData key="bukrs" value="Company Code"></core:CustomData>
-						<core:CustomData key="vname" value="Joint Venture"></core:CustomData>
+						<core:CustomData key="bukrs" value="Identifier"></core:CustomData>
+						<core:CustomData key="vname" value="Description"></core:CustomData>
+						<core:CustomData key="vname" value="House Bank"></core:CustomData>
+						<core:CustomData key="vname" value="Bank Country"></core:CustomData>
+						<core:CustomData key="vname" value="Bank Key"></core:CustomData>
+						<core:CustomData key="vname" value="Bank Name"></core:CustomData>
+						<core:CustomData key="vname" value="City"></core:CustomData>
 					</customData>
 				</Input>
-				<Input value="" editable="false"/>
 				<Label text="Commitment Item"/>
-				<Input editable="false">
-					<layoutData>
-						<l:GridData span="XL2 L2 M3 S4"/>
-					</layoutData>
-				</Input>
-				<Input value="" editable="false"/>
+				<Input value="{GL>/Skb1/fipos}" editable="{App>/edit}"></Input>
 				<core:Title text=""/>
 				<Label text="Relevant to Cash Flow"/>
-				<CheckBox select="onSelectCheckBox" selected="{= ${CostCenter>/Csks/bkzkp} === 'X'}" editable="{App>/edit}">
+				<CheckBox select="onSelectCheckBox" selected="{= ${GL>/Skb1/xgkon} === 'X'}" editable="{App>/edit}">
 					<customData>
-						<core:CustomData key="CostCenter>/Csks/bkzkp"/>
+						<core:CustomData key="GL>/Skb1/xgkon"/>
 					</customData>
 				</CheckBox>
 				<Label text="Account ID"/>
-				<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{CostCenter>/Csks/vname}"
-					editable="{App>/edit}">
-					<layoutData>
-						<l:GridData span="XL2 L2 M3 S4"/>
-					</layoutData>
+				<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{GL>/Skb1/hktid}" editable="{App>/edit}">
 					<customData>
 						<core:CustomData key="title" value="Account ID"></core:CustomData>
-						<core:CustomData key="table" value="T8JV"></core:CustomData>
-						<core:CustomData key="inputKey" value="vname"></core:CustomData>
-						<core:CustomData key="inputText" value="vname"></core:CustomData>
-						<core:CustomData key="bukrs" value="Company Code"></core:CustomData>
-						<core:CustomData key="vname" value="Joint Venture"></core:CustomData>
+						<core:CustomData key="table" value="T012K"></core:CustomData>
+						<core:CustomData key="inputKey" value="hktid"></core:CustomData>
+						<core:CustomData key="inputText" value="hktid"></core:CustomData>
+						<core:CustomData key="hktid" value="Account ID"></core:CustomData>
+						<core:CustomData key="vname" value="House Bank"></core:CustomData>
+						<core:CustomData key="vname" value="Explanation"></core:CustomData>
+						<core:CustomData key="vname" value="Description"></core:CustomData>
 					</customData>
 				</Input>
-				<Input value="" editable="false"/>
 				<core:Title text="Interest Calculation Information in Company Code"/>
 				<Label text="Interest Calculation Indicator"/>
-				<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{CostCenter>/Csks/vname}"
-					editable="{App>/edit}">
-					<layoutData>
-						<l:GridData span="XL2 L2 M3 S4"/>
-					</layoutData>
+				<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{GL>/Skb1/vzskz}" editable="{App>/edit}">
 					<customData>
 						<core:CustomData key="title" value="Interest Calculation Indicator"></core:CustomData>
-						<core:CustomData key="table" value="T8JV"></core:CustomData>
-						<core:CustomData key="inputKey" value="vname"></core:CustomData>
-						<core:CustomData key="inputText" value="vname"></core:CustomData>
-						<core:CustomData key="bukrs" value="Company Code"></core:CustomData>
-						<core:CustomData key="vname" value="Joint Venture"></core:CustomData>
+						<core:CustomData key="table" value="T056"></core:CustomData>
+						<core:CustomData key="inputKey" value="vzskz"></core:CustomData>
+						<core:CustomData key="inputText" value="vzskz"></core:CustomData>
+						<core:CustomData key="vzskz" value="Identifier"></core:CustomData>
+						<core:CustomData key="vname" value="Description"></core:CustomData>
 					</customData>
 				</Input>
-				<Input value="" editable="false"/>
 				<Label text="Interest Calculation Frequency"/>
-				<ComboBox selectedKey="{CostCenter>spras}" editable="{App>/edit}">
-					<core:Item key="{Dropdowns>spras}" text="{Dropdowns>sptxt}"/>
+				<ComboBox selectedKey="{GL>/Skb1/zinrt}" editable="{App>/edit}">
+					<core:Item key="01" text="1 Month"/>
+					<core:Item key="02" text="2 Month"/>
+					<core:Item key="03" text="3 Month"/>
+					<core:Item key="04" text="4 Month"/>
+					<core:Item key="05" text="5 Month"/>
+					<core:Item key="06" text="6 Month"/>
+					<core:Item key="07" text="7 Month"/>
+					<core:Item key="08" text="8 Month"/>
+					<core:Item key="09" text="9 Month"/>
+					<core:Item key="10" text="10 Month"/>
+					<core:Item key="11" text="11 Month"/>
+					<core:Item key="12" text="12 Month"/>
 				</ComboBox>
 			</form:content>
 		</form:SimpleForm>
