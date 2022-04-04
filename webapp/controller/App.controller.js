@@ -44,7 +44,8 @@ sap.ui.define([
 				"T001", //Company Codes
 				"vw_TFKB", //Functional Group
 				"vw_t004", //Chart of accounts
-				"TCURC" //Currency
+				"TCURC", //Currency
+				"vw_katyz" //Cost Element Category
 			];
 			aDropDowns.forEach(function (sValue) {
 				this.getDropdownTableData(sValue);

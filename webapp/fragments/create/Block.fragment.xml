@@ -1,0 +1,27 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout">
+	<form:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+		adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+		singleContainerFullSize="false">
+		<form:content>
+			<core:Title text="Block in Chart Of Accounts"/>
+			<Label text="Blocked for Creation"/>
+			<CheckBox select="onSelectCheckBox" selected="{= ${GL>/Ska1/xspea} === 'X'}" >
+				<customData>
+					<core:CustomData key="GL>/Ska1/xspea"/>
+				</customData>
+			</CheckBox>
+			<Label text="Blocked for Posting"/>
+			<CheckBox select="onSelectCheckBox" selected="{= ${GL>/Ska1/xspeb} === 'X'}" >
+				<customData>
+					<core:CustomData key="GL>/Ska1/xspeb"/>
+				</customData>
+			</CheckBox>
+			<Label text="Blocked for Planning"/>
+			<CheckBox select="onSelectCheckBox" selected="{= ${GL>/Ska1/xspep} === 'X'}" >
+				<customData>
+					<core:CustomData key="GL>/Ska1/xspep"/>
+				</customData>
+			</CheckBox>
+		</form:content>
+	</form:SimpleForm>
+</core:FragmentDefinition>

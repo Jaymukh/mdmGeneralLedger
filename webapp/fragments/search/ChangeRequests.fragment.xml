@@ -1,7 +1,7 @@
 <core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:uxap="sap.uxap" xmlns:filterbar="sap.ui.comp.filterbar"
 	xmlns:l="sap.ui.layout">
-	<l:DynamicSideContent class="sapUiDSCExplored" containerQuery="true" sideContentFallDown="BelowM" showSideContent="false"
-		breakpointChanged="handleBreakpointChangeEvent">
+	<l:DynamicSideContent id="idGLCRDynamicPage" class="sapUiDSCExplored" containerQuery="true" sideContentFallDown="BelowM"
+		showSideContent="false" breakpointChanged="handleBreakpointChangeEvent">
 		<VBox>
 			<Table mode="SingleSelectLeft" fixedLayout="false" items="{ChangeRequestsModel>/ChangeRequests}" selectionChange="onSelectCRinTable"
 				noDataText="No Chnage Request available, Please adjust filter or Try Again.">
@@ -71,13 +71,14 @@
 				<items>
 					<ColumnListItem>
 						<cells>
-							<Link text="{ parts: [ 'ChangeRequestsModel>change_request_id', 'ChangeRequestsModel>entity_id'], formatter: '.formatCR_Entiry_ID' }"
-								press="onChangeReqLinkPress"></Link>
-							<Text text="{ChangeRequestsModel>change_request_desc}"></Text>
-							<ObjectStatus text="{path:'ChangeRequestsModel>is_cr_closed',formatter:'.getStatusOfCr'}"/>
-							<Text text="{path:'ChangeRequestsModel>change_request_date',formatter:'.getDateofCr'}"></Text>
-							<Text text="{ChangeRequestsModel>modified_by}"></Text>
-							<Text text="{ChangeRequestsModel>change_request_by/display_name}"></Text>
+							<Link
+								text="{ parts: [ 'ChangeRequestsModel>crDTO/change_request_id', 'ChangeRequestsModel>crDTO/entity_id'], formatter: '.formatCR_Entiry_ID' }"
+								press="onGLCRPress"></Link>
+							<Text text="{ChangeRequestsModel>crDTO/change_request_desc}"></Text>
+							<ObjectStatus text="{path:'ChangeRequestsModel>crDTO/is_cr_closed',formatter:'.getStatusOfCr'}"/>
+							<Text text="{path:'ChangeRequestsModel>crDTO/change_request_date',formatter:'.getDateofCr'}"></Text>
+							<Text text="{ChangeRequestsModel>crDTO/modified_by}"></Text>
+							<Text text="{ChangeRequestsModel>crDTO/change_request_by/display_name}"></Text>
 							<Text text=""></Text>
 							<Text text=""></Text>
 						</cells>

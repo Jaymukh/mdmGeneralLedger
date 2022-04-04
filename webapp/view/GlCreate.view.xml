@@ -3,7 +3,7 @@
 	<Page showHeader="false" showNavButton="false" showFooter="true">
 		<content>
 			<Toolbar>
-				<Title text="" level="H2"></Title>
+				<Title text="G/L Account {GL>/Ska1/ktopl} / {GL>/Ska1/saknr} / {App>/glName}" level="H2"></Title>
 			</Toolbar>
 			<l:DynamicSideContent class="sapUiDSCExplored createPageHeight" containerQuery="true" sideContentFallDown="BelowM"
 				breakpointChanged="handleBreakpointChangeEvent">
@@ -16,6 +16,16 @@
 					<Panel expandable="true" expanded="true" headerText="Validity" visible="false">
 						<content>
 							<core:Fragment fragmentName="murphy.mdm.mdmGLAccount.fragments.create.Validity" type="XML"/>
+						</content>
+					</Panel>
+					<Panel expandable="true" expanded="true" headerText="Deletion Flag" visible="{= ${GL>/ChangeRequest/change_request_id} === 50005}">
+						<content>
+							<core:Fragment fragmentName="murphy.mdm.mdmGLAccount.fragments.create.Delete" type="XML"/>
+						</content>
+					</Panel>
+					<Panel expandable="true" expanded="true" headerText="Blocking Flags" visible="{= ${GL>/ChangeRequest/change_request_id} === 50004}">
+						<content>
+							<core:Fragment fragmentName="murphy.mdm.mdmGLAccount.fragments.create.Block" type="XML"/>
 						</content>
 					</Panel>
 					<Panel expandable="true" expanded="false" headerText="Account Details">

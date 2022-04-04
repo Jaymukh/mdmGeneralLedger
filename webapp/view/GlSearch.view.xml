@@ -115,7 +115,7 @@
 				<items>
 					<ColumnListItem >
 						<cells>
-							<Link text="{SearchGLModel>generalLedgerSka1DTO/saknr}" press="onGlDetails"></Link>
+							<Link text="{SearchGLModel>generalLedgerSka1DTO/saknr}" press="onPreviewGL"></Link>
 							<Text text="{SearchGLModel>generalLedgerSka1DTO/txt20}"></Text>
 							<ObjectStatus state="{path :'SearchGLModel>pendingRequest', formatter : '.handlePendingRequest'}" text="{SearchGLModel>pendingRequest}"/>
 							<Text text=""></Text>

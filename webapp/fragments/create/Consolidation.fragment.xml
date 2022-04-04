@@ -5,21 +5,22 @@
 		<form:content>
 			<core:Title text="Consolidation Details"/>
 			<Label text="Trading Partner"/>
-			<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{GL>/Csks/vname}"
-				editable="{App>/edit}">
+			<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{GL>/Ska1/vbund}" editable="{App>/edit}"
+				maxLength="6">
 				<customData>
 					<core:CustomData key="title" value="Trading Partner"></core:CustomData>
-					<core:CustomData key="table" value="T8JV"></core:CustomData>
-					<core:CustomData key="inputKey" value="vname"></core:CustomData>
-					<core:CustomData key="inputText" value="vname"></core:CustomData>
-					<core:CustomData key="bukrs" value="Company Code"></core:CustomData>
-					<core:CustomData key="vname" value="Joint Venture"></core:CustomData>
+					<core:CustomData key="table" value="T880"></core:CustomData>
+					<core:CustomData key="inputKey" value="rcomp"></core:CustomData>
+					<core:CustomData key="inputText" value="rcomp"></core:CustomData>
+					<core:CustomData key="rcomp" value="Identifier"></core:CustomData>
+					<core:CustomData key="name1" value="Name1"></core:CustomData>
+					<core:CustomData key="name2" value="Name2"></core:CustomData>
 				</customData>
 			</Input>
 			<Label text="Group Account"/>
-			<Input value="{GL>/Csks/kostl}" editable="false"/>
+			<Input value="{GL>/Ska1/bilkt}" editable="false" maxLength="10"/>
 			<Label text="Statistical Group Account"/>
-			<Input value="{GL>/Cskt/ltext}" editable="false"/>
+			<Input value="" editable="false"/>
 		</form:content>
 	</form:SimpleForm>
 </core:FragmentDefinition>

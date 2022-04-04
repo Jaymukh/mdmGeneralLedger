@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout">
-	<Table items="{GL>/Skat}">
+	<Table items="{GL>/TableRows/Skat}">
 		<headerToolbar>
 			<Toolbar>
 				<ToolbarSpacer></ToolbarSpacer>
@@ -34,8 +34,8 @@
 					<ComboBox required="true" selectedKey="{GL>spras}" items="{Dropdowns>/T002}" editable="{App>/edit}">
 						<core:Item key="{Dropdowns>spras}" text="{Dropdowns>sptxt}"/>
 					</ComboBox>
-					<Input value="{GL>ktext}" editable="{App>/edit}"/>
-					<Input value="{GL>ltext}" editable="{App>/edit}"/>
+					<Input value="{GL>txt20}" editable="{App>/edit}"  maxLength="20"/>
+					<Input value="{GL>txt50}" editable="{App>/edit}" maxLength="50"/>
 					<core:Icon src="sap-icon://delete" color="Negative" class="sapUiSmallMarginEnd" press="onDeleteDesc" visible="{App>/edit}"/>
 				</cells>
 			</ColumnListItem>

@@ -1,9 +1,9 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout">
-	<Table items="{GL>/Cskt}">
+	<Table items="{path:'GL>/TableRows/Cskb',templateShareable: true}">
 		<headerToolbar>
 			<Toolbar>
 				<ToolbarSpacer></ToolbarSpacer>
-				<Button text="Add" press="onAddDescription" type="Emphasized" visible="{App>/edit}"></Button>
+				<Button text="Add" press="onAddCO" type="Emphasized" visible="{App>/edit}"></Button>
 			</Toolbar>
 		</headerToolbar>
 		<columns>
@@ -19,22 +19,12 @@
 			</Column>
 			<Column>
 				<header>
-					<Label text="Cost Element Name" design="Bold"></Label>
-				</header>
-			</Column>
-			<Column>
-				<header>
 					<Label text="Functional Area" design="Bold"></Label>
 				</header>
 			</Column>
 			<Column>
 				<header>
 					<Label text="Cost Element Category" design="Bold"></Label>
-				</header>
-			</Column>
-			<Column>
-				<header>
-					<Label text="Cost Element Category Name" design="Bold"></Label>
 				</header>
 			</Column>
 			<Column width="5%">
@@ -46,15 +36,23 @@
 		<items>
 			<ColumnListItem>
 				<cells>
-					<ComboBox required="true" selectedKey="{GL>spras}" items="{Dropdowns>/T002}" editable="{App>/edit}">
-						<core:Item key="{Dropdowns>spras}" text="{Dropdowns>sptxt}"/>
+					<Input showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{GL>kokrs}" editable="{App>/edit}"
+						maxLength="4">
+						<customData>
+							<core:CustomData key="title" value="Controlling Area"></core:CustomData>
+							<core:CustomData key="table" value="TKA01"></core:CustomData>
+							<core:CustomData key="inputKey" value="kokrs"></core:CustomData>
+							<core:CustomData key="inputText" value="kokrs"></core:CustomData>
+							<core:CustomData key="kokrs" value="CO Area"></core:CustomData>
+							<core:CustomData key="bezei" value="Name"></core:CustomData>
+						</customData>
+					</Input>
+					<Text text="{GL>kstar}"/>
+					<Text text="{GL>func_area}"/>
+					<ComboBox selectedKey="{GL>katyp}" items="{Dropdowns>/vw_katyz}" editable="{App>/edit}" width="100%">
+						<core:ListItem key="{Dropdowns>katyp}" text="{Dropdowns>txt150}"/>
 					</ComboBox>
-					<Input value="{GL>ktext}" editable="{App>/edit}"/>
-					<Input value="{GL>ltext}" editable="{App>/edit}"/>
-					<Input value="{GL>ktext}" editable="{App>/edit}"/>
-					<Input value="{GL>ktext}" editable="{App>/edit}"/>
-					<Input value="{GL>ktext}" editable="{App>/edit}"/>
-					<core:Icon src="sap-icon://delete" color="Negative" class="sapUiSmallMarginEnd" press="onDeleteDesc" visible="{App>/edit}"/>
+					<core:Icon src="sap-icon://delete" color="Negative" class="sapUiSmallMarginEnd" press="onDeleteCO" visible="{App>/edit}"/>
 				</cells>
 			</ColumnListItem>
 		</items>

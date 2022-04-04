@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout">
-	<form:SimpleForm id="idCCDetails" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+	<form:SimpleForm id="idGLDetails" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
 		labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
 		singleContainerFullSize="false">
 		<form:content>
@@ -9,17 +9,18 @@
 				<core:ListItem key="{Dropdowns>ktopl}" text="{Dropdowns>ktplt}" additionalText="{Dropdowns>ktopl}"/>
 			</ComboBox>
 			<Label text="Account / Name" required="true"/>
-			<Input required="true" value="{GL>/Ska1/saknr}" editable="{App>/edit}">
+			<Input required="true" value="{GL>/Ska1/saknr}" editable="{App>/edit}" maxLength="10">
 				<layoutData>
 					<l:GridData span="XL2 L2 M3 S4"/>
 				</layoutData>
 			</Input>
-			<Input required="true" value="" liveChange="onChangeName" editable="{App>/edit}"/>
+			<Input required="true" value="{App>/glName}" liveChange="onChangeName" editable="{App>/edit}" maxLength="20"/>
 			<Label text="Long Text"/>
-			<Input value="" liveChange="onChangeMText" editable="{App>/edit}"/>
+			<Input value="{App>/glLongText}" liveChange="onChangeMText" editable="{App>/edit}" maxLength="50"/>
 			<core:Title text="Administrative Data"/>
 			<Label text="New Account"/>
-			<Input value="{GL>/Ska1/sakan}" editable="{App>/edit}" valueHelpOnly="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequested">
+			<Input value="{GL>/Ska1/sakan}" editable="{App>/edit}" valueHelpOnly="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequested"
+			maxLength="10">
 				<customData>
 					<core:CustomData key="title" value="Accounts"></core:CustomData>
 					<core:CustomData key="table" value="vw_ska1"></core:CustomData>
@@ -29,7 +30,7 @@
 					<core:CustomData key="txt20" value="Description"></core:CustomData>
 				</customData>
 			</Input>
-			<Label text="User Responsible"/>
+			<!--<Label text="User Responsible"/>
 			<Input value="" editable="{App>/edit}" valueHelpOnly="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequested">
 				<customData>
 					<core:CustomData key="title" value="User Responsible"></core:CustomData>
@@ -41,11 +42,11 @@
 				</customData>
 			</Input>
 			<Label text="Person Responsible" required="true"/>
-			<Input value="" editable="{App>/edit}"/>
+			<Input value="" editable="{App>/edit}"/>-->
 			<core:Title text="Control Data"/>
 			<Label text="Account Group" required="true"/>
 			<Input required="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequested" valueHelpOnly="true" value="{GL>/Ska1/ktoks}"
-				editable="{App>/edit}">
+				editable="{App>/edit}" maxLength="4">
 				<customData>
 					<core:CustomData key="title" value="Account Group"></core:CustomData>
 					<core:CustomData key="table" value="T077S"></core:CustomData>
@@ -61,17 +62,16 @@
 				<core:ListItem key=" " text="Profit &amp; Loss Account"/>
 			</ComboBox>
 			<Label text="P&amp;L Statement Account Type"/>
-			<Input value="{GL>/Ska1/gvtyp}" editable="false"></Input>
-			<Input value="{GL>/Cskt/ktext}" editable="false"/>
+			<Input value="{GL>/Ska1/gvtyp}" editable="false" maxLength="2"></Input>
 			<Label text="Functional Area"/>
 			<ComboBox required="true" selectedKey="{GL>/Ska1/func_area}" items="{Dropdowns>/vw_TFKB}" editable="{App>/edit}" showSecondaryValues="true">
 				<core:ListItem key="{Dropdowns>fkber}" text="{Dropdowns>fkber}"/>
 			</ComboBox>
 			<core:Title text="Audit Information"/>
 			<Label text="Created On/By"/>
-			<Input editable="false" value="{GL>/Ska1/erdta}/{GL>/Ska1/ernam}"/>
+			<Input editable="false" value="{GL>/Ska1/erdta}/{GL>/Ska1/ernam}" maxLength="12"/>
 			<Label text="Changed On/By"/>
-			<Input editable="false" value=""/>
+			<Input editable="false" value="" maxLength="12"/>
 		</form:content>
 	</form:SimpleForm>
 </core:FragmentDefinition>

@@ -13,6 +13,8 @@
 	"dateValueFormat": "yyyy-MM-dd",
 	"sidePanelSelectedPage": "",
 	"sideNavExp": false,
+	"glName":"",
+	"glLongText": "",
 	"supportedFileTypes": ["jpg", "jpeg", "png", "pdf", "msg", "eml"],
 	"changeReq": {
 		"desc": "",
@@ -37,7 +39,7 @@
 		"erdat": "",
 		"ernam": "",
 		"gvtyp": "",
-		"ktoks": "",
+		"ktoks": "ZZZZ",
 		"mustr": "",
 		"vbund": "",
 		"xloev": "",

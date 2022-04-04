@@ -5,7 +5,7 @@
 		<form:content>
 			<core:Title text="General Data"/>
 			<Label text="Change Request ID"/>
-			<Input value="{ parts: [ 'GL>/createCRCCData/crID', 'GL>/Ska1/entity_id'], formatter: '.formatCR_Entiry_ID' }" editable="false"/>
+			<Input value="{ parts: [ 'GL>/crID', 'GL>/Ska1/entity_id'], formatter: '.formatCR_Entiry_ID' }" editable="false"/>
 			<Label text="Description"/>
 			<TextArea required="true" value="{GL>/ChangeRequest/desc}"/>
 			<Label text="Priority"/>
